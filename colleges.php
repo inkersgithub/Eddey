@@ -38,6 +38,22 @@
 		  width: 100%;
 			height: auto;
 	  	}
+	  	table {
+			border-collapse: collapse;
+			width: 100%;
+	  	}
+
+	  th, td {
+    	text-align: left;
+    	padding: 8px;
+	  }
+
+	  tr:nth-child(even){background-color: #f2f2f2}
+
+	  th {
+		  background-color: #40c1ee;
+    	color: white;
+	  }
   </style>
 	 <div class="mWrapper">
       <div class="container">
@@ -63,37 +79,113 @@
 		</div>
 		<div class="container">
 			<div>
-				<img src="images/logo.png" width="460" height="345">
+<!--				<img src="images/logo.png" width="460" height="345">-->
 			</div>
 			<div class="row">
 				<div class="col-sm-2"></div>
   				<div class="col-sm-8">
 					<ul class="nav nav-pills">
-						<li class="active"><a data-toggle="pill" href="#home">Home</a></li>
-						<li><a data-toggle="pill" href="#menu1">Info</a></li>
-						<li><a data-toggle="pill" href="#menu2">Contact Details</a></li>
-						<li><a data-toggle="pill" href="#menu3">Courses</a></li>
-						<li><a data-toggle="pill" href="#menu4">Hostel</a></li>
-						<li><a data-toggle="pill" href="#menu5">Bus Facilities</a></li>
-						<li><a data-toggle="pill" href="#menu6">Infrastructure</a></li>
-						<li><a data-toggle="pill" href="#menu7">Gallery</a></li>
+						<li class="active"><a data-toggle="pill" href="#home">ALL</a></li>
+						<li><a data-toggle="pill" href="#menu1">UG</a></li>
+						<li><a data-toggle="pill" href="#menu2">PG</a></li>
+<!--
+						<li><a data-toggle="pill" href="#menu3">HOSTEL</a></li>
+						<li><a data-toggle="pill" href="#menu4">BUS FACILITIES</a></li>
+						<li><a data-toggle="pill" href="#menu5">INFRASTRUCTURE</a></li>
+						<li><a data-toggle="pill" href="#menu6">GALLERY</a></li>
+-->
+
 					</ul>
 				</div>
 				<div class="col-sm-2"></div>
 			</div>
-  		<div class="tab-content">
-			<div id="home" class="tab-pane fade in active">
-      		<h3>HOME</h3>
-      		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</</p>
-      		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    	</div>
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+      				<table style="margin-top: 60px;">
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Savings</th>
+						</tr>
+						<tr>
+    						<td>Peter</td>
+							<td>Griffin</td>
+							<td>$100</td>
+						</tr>
+						<tr>
+							<td>Lois</td>
+							<td>Griffin</td>
+    						<td>$150</td>
+						</tr>
+						<tr>
+							<td>Joe</td>
+							<td>Swanson</td>
+							<td>$300</td>
+  						</tr>
+						<tr>
+							<td>Cleveland</td>
+							<td>Brown</td>
+							<td>$250</td>
+						</tr>
+						</table>
+    			</div>
 		<div id="menu1" class="tab-pane fade">
-			<h3>Menu 1</h3>
-      		<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
+			<table style="margin-top: 80px;">
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Savings</th>
+						</tr>
+						<tr>
+    						<td>Peter</td>
+							<td>Griffin</td>
+							<td>$100</td>
+						</tr>
+						<tr>
+							<td>Lois</td>
+							<td>Griffin</td>
+    						<td>$150</td>
+						</tr>
+						<tr>
+							<td>Joe</td>
+							<td>Swanson</td>
+							<td>$300</td>
+  						</tr>
+						<tr>
+							<td>Cleveland</td>
+							<td>Brown</td>
+							<td>$250</td>
+						</tr>
+						</table>
+		</div>
     	<div id="menu2" class="tab-pane fade">
-			<h3>Menu 2</h3>
-			<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+			<table style="margin-top: 80px;">
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Savings</th>
+						</tr>
+						<tr>
+    						<td>Peter</td>
+							<td>Griffin</td>
+							<td>$100</td>
+						</tr>
+						<tr>
+							<td>Lois</td>
+							<td>Griffin</td>
+    						<td>$150</td>
+						</tr>
+						<tr>
+							<td>Joe</td>
+							<td>Swanson</td>
+							<td>$300</td>
+  						</tr>
+						<tr>
+							<td>Cleveland</td>
+							<td>Brown</td>
+							<td>$250</td>
+						</tr>
+						</table>
     	</div>
     	<div id="menu3" class="tab-pane fade">
       		<h3>Menu 3</h3>
