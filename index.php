@@ -40,10 +40,14 @@ include_once 'dbconnect.php';
         <link rel="stylesheet" href="assets/css/responsive.css">
     </head>
 	<style>
-	.dropdown-menu{
-    width: 300px;
-    white-space: normal;
-	}
+		#header-wrap {
+    background: #ffffff;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: 0;
+    z-index: 1;
+}	
 	</style>
     <body>
 
@@ -51,36 +55,10 @@ include_once 'dbconnect.php';
             <div id="status">&nbsp;</div>
         </div>
         <!-- Body content -->
-
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +9746364612</span>
-                                <span><i class="pe-7s-mail"></i> info@eddey.com</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>        
+           
         <!--End top header -->
 
-        <nav class="navbar navbar-default ">
+        <nav class="navbar navbar-default" id="header-wrap">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
