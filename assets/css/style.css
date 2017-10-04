@@ -11,7 +11,7 @@ body {
     font-size:14px;
     line-height: 28px;
     color: #777; 
-    background: #fff; 
+    background: #f3f3f3; 
     position: relative;
 }
 /*           Font Smoothing      */
@@ -738,7 +738,7 @@ label small{
 
 }
 .main-nav {
-    padding-top: 10px;
+    padding-top: 14px;
 }
 .button.navbar-right {
     padding-top: 10px;
@@ -765,7 +765,7 @@ label small{
 }
 .navbar{
     margin-bottom: 0px;
-    min-height: 100px;
+    min-height: 80px;
 }
 .navbar-default {
     background-image: none;
@@ -775,7 +775,7 @@ label small{
     box-shadow: none;
 }
 .navbar .container{
-    padding-top: 15px
+    padding-top: 1px
 }
 .navbar-default {
     background-image: none;
@@ -2608,7 +2608,7 @@ padding-bottom: 15px;
 .large-search .search-form .form-inline .form-control, .form-inline .form-control,
 .large-search .search-form .bootstrap-select button.dropdown-toggle ,
 .large-search .search-form .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
-    width:100%;
+    width:91%;
 }
 .large-search .search-row{
     overflow: hidden;

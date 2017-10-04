@@ -1,8 +1,7 @@
 <?php
 include_once 'dbconnect.php';
-$search = $_POST["search_value"]; 
-$search_id = explode('$$',$search);
-$res = mysqli_query($con,"SELECT * FROM colleges where id='".$search_id[0]."'");
+$search = $_POST["college_name"]; 
+$res = mysqli_query($con,"SELECT * FROM colleges WHERE college_institution LIKE '%".$search."%'");
 $row = mysqli_fetch_array($res);
 ?>
 
@@ -41,6 +40,7 @@ $row = mysqli_fetch_array($res);
         <link rel="stylesheet" href="assets/css/lightslider.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
+		
     </head>
     <style>
 		
@@ -195,9 +195,9 @@ $row = mysqli_fetch_array($res);
                                 </div>
 
                                 <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                    <i class="fa fa-wifi" style="font-size:48px;color:#fdc601;"></i>
+                                    <i class="fa fa-book" style="font-size:48px;color:#fdc601;"></i>
                                     <span class="property-info-entry">
-                                        <span class="property-info-label">Wifi</span>
+                                        <span class="property-info-label">Library</span>
                                         <span class="property-info-value">Enable</span>
                                     </span>
                                 </div>
