@@ -1,755 +1,621 @@
 <?php
-include_once 'dbconnect.php';
+	//added standard php/mysql config file with host, user and password info
+	require "server/config.php";
+	
+	//models and collections
+	require "server/domain/models/filter-result-model.php";
+	require "server/domain/collection/filter-result-collection.php";
+	
+	//domain
+	require "server/domain/action.php";
+	require "server/domain/filtering.php";
+	
+	//controls
+	require "server/controls/textbox.php";	
+	require "server/controls/checkboxgroupfilter.php";
+	require "server/controls/filterdropdown.php";
+	require "server/controls/filterselect.php";
+    require "server/controls/range-slider.php";	
+    require "server/controls/range-filter.php";
 ?>
 
-    <!DOCTYPE html>
-    <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-    <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-    <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-    <!--[if gt IE 8]><!-->
-    <html class="no-js">
-    <!--<![endif]-->
+<!doctype html>
+<html>
+<head>
+    <title>Fallback for search engines demo | jPList - jQuery Data Grid Controls</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>EDDEY | Home page</title>
-        <meta name="description" content="GARO is a real-estate template">
-        <meta name="author" content="Kimarotec">
-        <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/fontello.css">
-        <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-        <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
-        <link href="assets/css/animate.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/icheck.min_all.css">
-        <link rel="stylesheet" href="assets/css/price-range.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.css">
-        <link rel="stylesheet" href="assets/css/owl.transitions.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- font libs -->
+    <link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
 
-        <script>
-            $(function() {
-                $("#skills").autocomplete({
-                    source: 'search.php'
-                });
+    <!-- demo page styles -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/css/jplist.demo-pages.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- jQuery lib -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- jPList core js and css  -->
+    <link href="dist/css/jplist.core.min.css" rel="stylesheet" type="text/css" />
+    <script src="dist/js/jplist.core-ajax.min.js"></script>
+
+    <!-- jPList sort bundle -->
+    <script src="dist/js/jplist.sort-bundle.min.js"></script>
+
+    <!-- jPList textbox filter control -->
+    <script src="dist/js/jplist.textbox-filter.min.js"></script>
+    <link href="dist/css/jplist.textbox-filter.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- jPList pagination bundle -->
+    <script src="dist/js/jplist.pagination-bundle.min.js"></script>
+    <link href="dist/css/jplist.pagination-bundle.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- jPList history bundle -->
+    <script src="dist/js/jplist.history-bundle.min.js"></script>
+    <link href="dist/css/jplist.history-bundle.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- jPList toggle bundle -->
+    <script src="dist/js/jplist.filter-toggle-bundle.min.js"></script>
+    <link href="dist/css/jplist.filter-toggle-bundle.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- jplist views control -->
+    <script src="dist/js/jplist.list-grid-view.min.js"></script>
+    <link href="dist/css/jplist.list-grid-view.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- filter dropdown control -->
+    <script src="dist/js/jplist.filter-dropdown-bundle.min.js"></script>
+
+    <!-- preloader -->
+    <script src="dist/js/jplist.preloader-control.min.js"></script>
+    <link href="dist/css/jplist.preloader-control.min.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        $('document').ready(function () {
+            $('#demo').jplist({
+
+                itemsBox: '.list'
+                , itemPath: '.list-item'
+                , panelPath: '.jplist-panel'
+                , deepLinking: true
+                , hashStart: '?'
+                , delimiter1: '&'
+
+                //data source
+                , dataSource: {
+
+                    type: 'server'
+                    , server: {
+
+                        //ajax settings
+                        ajax: {
+                            url: 'server/server-html.php'
+                            , dataType: 'html'
+                            , type: 'POST'
+                        }
+                    }
+                }
+
             });
-        </script>
-    </head>
-    <style>
-        .ui-menu .ui-menu-item {
-            position: relative;
-            margin: 0;
-            text-transform: uppercase;
-            padding: 3px 1em 3px .4em;
-            cursor: pointer;
-            min-height: 0;
-        }
-		#buttons{
-    float:right;
-    position:relative;
-    left:-50%;
-    text-align:left;
-}
-#buttons ul{
-    list-style:none;
-    position:relative;
-    left:50%;
-}
+        });
+    </script>
 
-#buttons li{float:left;position:relative;}/* ie needs position:relative here*/
+</head>
+<body>
 
+<!-- top bar -->
+<div id="black-top-bar" class="box">
+    <div class="center">
+        <div class="box">
 
-    </style>
+            <!-- left menu -->
+            <ul id="black-top-bar-left-menu" class="hmenu left iphone-hidden">
+                <li class="glow">
+                    <a title="" href="//github.com/no81no/jplist/issues?state=open">
+                        <i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug
+                    </a>
+                </li>
+            </ul>
 
-    <body>
-
-        <div id="preloader">
-            <div id="status">&nbsp;</div>
+            <!-- social menu -->
+            <ul id="social-menu" class="hmenu right">
+                <li class="glow"><a title="" href="//www.facebook.com/jplist"><i class="fa fa-facebook"></i>&nbsp;</a></li>
+                <li class="glow"><a rel="publisher" title="" href="//plus.google.com/+Jplistjs"><i class="fa fa-google-plus"></i></a></li>
+                <li class="glow"><a title="" href="//twitter.com/jquery_jplist"><i class="fa fa-twitter"></i></a></li>
+                <li class="glow"><a title="" href="//github.com/no81no/jplist"><i class="fa fa-github"></i></a></li>
+            </ul>
         </div>
-        <!-- Body content -->
+    </div>
+</div>
 
-        <!--End top header -->
+<!-- header -->
+<header id="header" class="box">
+    <div id="header-box" class="box">
+        <div class="center">
+            <div class="box">
 
-        <nav class="navbar navbar-default" id="header-wrap">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt=""></a>
+                <!-- logo -->
+                <div class="align-center text-shadow" id="logo">
+                    <p>
+                        <img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="//jplist.com/content/img/common/rocket.png" />
+                        <a title="" href="//jplist.com">jPList - jQuery Data Grid Controls</a>
+                    </p>
+                    <h1 class="h1-30-normal">Fallback for search engines demo</h1>
                 </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse yamm" id="navigation">
-                    <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="index.php">Home</a></li>
-                        <li class="dropdown yamm-fw" data-wow-delay="0.4s">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Browse<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="yamm-content">
-                                        <div class="row">
-                                            <div class="col-sm-3">
-                                                <h5>College</h5>
-                                                <ul>
-                                                    <li>
-                                                        <a href="index.html">College 1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="index.html">College 2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="index.html">College 3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="indexhtml">College 4</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="index.html">College 5</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>Courses</h5>
-                                                <ul>
-                                                    <li><a href="index.html">Course 1</a> </li>
-                                                    <li><a href="index.html">Courses 2</a> </li>
-                                                    <li>
-                                                        <a href="index.html"></a>Courses 3 </li>
-                                                    <li><a href="index.html">Courses 4</a> </li>
-                                                    <li><a href="index.html">Courses 5</a> </li>
-                                                    <li><a href="index.html">Courses 6</a> </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>Exams</h5>
-                                                <ul>
-                                                    <li><a href="index.html">Exam 1</a> </li>
-                                                    <li><a href="index.html">Exam 2</a> </li>
-                                                    <li><a href="index.html">Exam 3</a> </li>
-                                                    <li><a href="index.html">Exam 4</a> </li>
-                                                    <li><a href="index.html">Exam 5</a> </li>
-                                                    <li><a href="index.html">Exam 6</a> </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <h5>Scholarship</h5>
-                                                <ul>
-                                                    <li><a href="index.html">Scholarship 1</a> </li>
-                                                    <li><a href="index.html">Scholarship 2</a> </li>
-                                                    <li><a href="index.html">Scholarship 3</a> </li>
-                                                    <li><a href="index.html">Scholarship 4</a> </li>
-                                                    <li><a href="index.html">Scholarship 5</a> </li>
-                                                    <li><a href="index.html">Scholarship 6</a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /.yamm-content -->
-                                </li>
-                            </ul>
-                        </li>
+            </div>
+        </div>
+    </div>
+</header>
 
-                        <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="contact.html">Contact</a></li>
+<!-- main content -->
+<div class="box">
+    <div class="center">
+        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO START <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
+
+        <div id="demo" class="box jplist">
+
+            <!-- ios button: show/hide panel -->
+            <div class="jplist-ios-button">
+                <i class="fa fa-sort"></i>
+                jPList Actions
+            </div>
+
+            <!-- panel -->
+            <div class="jplist-panel box panel-top">
+
+                <!-- reset button -->
+                <button
+                        type="button"
+                        class="jplist-reset-btn"
+                        data-control-type="reset"
+                        data-control-name="reset"
+                        data-control-action="reset">
+                    Reset &nbsp;<i class="fa fa-share"></i>
+                </button>
+
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="items-per-page-drop-down"
+                        data-control-name="paging"
+                        data-control-action="paging">
+
+                    <ul>
+                        <li><span data-number="3"> 3 per page </span></li>
+                        <li><span data-number="5"> 5 per page </span></li>
+                        <li><span data-number="10" data-default="true"> 10 per page </span></li>
+                        <li><span data-number="all"> View All </span></li>
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
+
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="sort-drop-down"
+                        data-control-name="sort"
+                        data-control-action="sort">
+
+                    <ul>
+                        <li><span data-path="default">Sort by</span></li>
+                        <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
+                        <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
+                        <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
+                        <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
+                        <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
+                        <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
+                    </ul>
+                </div>
+
+                <!-- filter by title -->
+                <div class="text-filter-box">
+
+                    <!--[if lt IE 10]>
+                    <div class="jplist-label">Filter by Title:</div>
+                    <![endif]-->
+
+                    <input
+                            data-path=".title"
+                            data-button="#title-search-button"
+                            type="text"
+                            value=""
+                            placeholder="Filter by Title"
+                            data-control-type="textbox"
+                            data-control-name="title-filter"
+                            data-control-action="filter"
+                    />
+
+                    <button
+                            type="button"
+                            id="title-search-button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- filter by description -->
+                <div class="text-filter-box">
+
+                    <!--[if lt IE 10]>
+                    <div class="jplist-label">Filter by Description:</div>
+                    <![endif]-->
+
+                    <input
+                            data-path=".desc"
+                            data-button="#desc-search-button"
+                            type="text"
+                            value=""
+                            placeholder="Filter by Description"
+                            data-control-type="textbox"
+                            data-control-name="desc-filter"
+                            data-control-action="filter"
+                    />
+
+                    <button
+                            type="button"
+                            id="desc-search-button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- filter dropdown control -->
+                <div
+                        class="jplist-drop-down"
+                        data-control-type="filter-drop-down"
+                        data-control-name="category-dropdown-filter"
+                        data-control-action="filter">
+
+                    <ul>
+                        <li><span data-path="default">Filter by category</span></li>
+                        <li><span data-path=".architecture">Architecture</span></li>
+                        <li><span data-path=".christmas">Christmas</span></li>
+                        <li><span data-path=".lifestyle">LifeStyle</span></li>
+                        <li><span data-path=".nature">Nature</span></li>
+                    </ul>
+                </div>
+
+                <!-- checkbox filters -->
+                <div
+                        class="jplist-group"
+                        data-control-type="checkbox-group-filter"
+                        data-control-action="filter"
+                        data-control-name="themes">
+
+                    <input
+                            data-path=".architecture"
+                            id="architecture"
+                            type="checkbox"
+                    />
+
+                    <label for="architecture">Architecture</label>
+
+                    <input
+                            data-path=".christmas"
+                            id="christmas"
+                            type="checkbox"
+                    />
+
+                    <label for="christmas">Christmas</label>
+
+                    <input
+                            data-path=".nature"
+                            id="nature"
+                            type="checkbox"
+                    />
+
+                    <label for="nature">Nature</label>
+
+                    <input
+                            data-path=".lifestyle"
+                            id="lifestyle"
+                            type="checkbox"
+                    />
+
+                    <label for="lifestyle">Lifestyle</label>
+                </div>
+
+                <div
+                        class="jplist-group"
+                        data-control-type="checkbox-group-filter"
+                        data-control-action="filter"
+                        data-control-name="colors">
+
+                    <input
+                            data-path=".red"
+                            id="red-color"
+                            type="checkbox"
+                    />
+
+                    <label for="red-color">Red</label>
+
+                    <input
+                            data-path=".green"
+                            id="green-color"
+                            type="checkbox"
+                    />
+
+                    <label for="green-color">Green</label>
+
+                    <input
+                            data-path=".blue"
+                            id="blue-color"
+                            type="checkbox"
+                    />
+
+                    <label for="blue-color">Blue</label>
+
+                    <input
+                            data-path=".brown"
+                            id="brown-color"
+                            type="checkbox"
+                    />
+
+                    <label for="brown-color">Brown</label>
+
+                </div>
+
+                <!-- views -->
+                <div
+                        class="jplist-views"
+                        data-control-type="views"
+                        data-control-name="views"
+                        data-control-action="views"
+                        data-default="jplist-list-view">
+
+                    <button type="button" class="jplist-view jplist-list-view" data-type="jplist-list-view"></button>
+                    <button type="button" class="jplist-view jplist-grid-view" data-type="jplist-grid-view"></button>
+                </div>
+
+                <!-- pagination results -->
+                <div
+                        class="jplist-label"
+                        data-type="Page {current} of {pages}"
+                        data-control-type="pagination-info"
+                        data-control-name="paging"
+                        data-control-action="paging">
+                </div>
+
+                <!-- pagination -->
+                <div
+                        class="jplist-pagination"
+                        data-control-type="pagination"
+                        data-control-name="paging"
+                        data-control-action="paging">
+                </div>
+
+                <!-- preloader for data sources -->
+                <div
+                        class="jplist-hide-preloader jplist-preloader"
+                        data-control-type="preloader"
+                        data-control-name="preloader"
+                        data-control-action="preloader">
+                    <img src="demo/img/common/ajax-loader-line.gif" alt="Loading..." title="Loading..." />
+                </div>
+
             </div>
-            <!-- /.container-fluid -->
-        </nav>
-        <!-- End of nav bar -->
-        <div class="slider-area">
-            <div class="slider">
-                <div id="bg-slider" class="owl-carousel owl-theme">
 
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpg" alt="GTA V"></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpg" alt="The Last of us"></div>
-                    <div class="item"><img src="assets/img/slide1/slider-image-2.jpg" alt="GTA V"></div>
+            <!-- ajax content here -->
+            <div class="list box text-shadow">
+                   
+                <?php
 
-                </div>
+                    class jPListHTML{
+
+                        /**
+                        * database instance
+                        */
+                        protected $db;
+
+                        /**
+                        * filter
+                        */
+                        protected $filter;
+
+                        /**
+                        * jplist statuses
+                        */
+                        protected $statuses;
+
+                        /**
+                        * execute query and get data from db
+                        * @return {Object} data
+                        */
+                        protected function getData(){
+
+                            $items = null;
+
+                            //init qury
+                            $query = "SELECT title, description, image, likes, viewsnumber, keyword1, keyword2 FROM " . DB_TABLE . " ";
+
+                            if($this->filter->filterQuery){				
+                                $query .= " " . $this->filter->filterQuery . " ";
+                            }
+
+                            if(count($this->filter->preparedParams) > 0){	
+
+                                $stmt = $this->db->prepare($query);
+                                $stmt->execute($this->filter->preparedParams);
+                                $items = $stmt->fetchAll();
+                            }
+                            else{
+                                $items = $this->db->query($query);
+                            }	
+
+                            return $items;
+                        }
+
+                        /**
+                        * get html for one item
+                        * @param {Object} $item
+                        * @return {string} html
+                        */
+                        private function getHTML($item){
+
+                            $html = "";
+
+                            $html .= "<div class='list-item box'>";	
+                            $html .= "	<div class='img left'>";
+                            $html .= "		<img src='" . $item['image'] . "' alt='' title=''/>";
+                            $html .= "	</div>";
+
+                            $html .= "	<div class='block right'>";
+                            $html .= "		<p class='title'>" . $item['title'] . "</p>";
+                            $html .= "		<p class='desc'>" . $item['description'] . "</p>";
+                            $html .= "		<p class='like'>" . $item['likes'] . " Likes</p>";
+                            $html .= "		<p class='views'>" . $item['viewsnumber'] . " Views</p>";
+                            $html .= "		<p class='theme'>" . $item['keyword1'] . ", " . $item['keyword2'] . "</p>";
+                            $html .= "	</div>";
+                            $html .= "</div>";
+
+                            return $html;
+                        }
+
+                        /**
+                        * constructor
+                        */
+                        public function __construct(){
+
+                            $html = "";
+
+                            try{
+                                //get title filter value from the query string
+                                $titleFilterValue = $_GET['title-filter:value'];
+
+                                if(isset($titleFilterValue)){
+
+                                    $statuses = '[{
+                                        "action": "filter",
+                                        "name": "title-filter",
+                                        "type": "textbox",
+                                        "data": {
+                                            "path": ".title",
+                                            "ignore": "",
+                                            "value": "' . $titleFilterValue . '",
+                                            "mode": "contains",
+                                            "filterType": "TextFilter"
+                                        },
+                                        "inStorage": true,
+                                        "inAnimation": true,
+                                        "isAnimateToTop": false,
+                                        "inDeepLinking": true
+                                    }]';
+
+                                    //connect to database 
+                                    $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);	
+
+                                    //decode statuses
+                                    $this->statuses = json_decode($statuses);
+
+                                    //start filter
+                                    $this->filter = new Filter($this->statuses);	
+
+                                    //get html data
+                                    $items = $this->getData();
+
+                                    if($items){
+                                        foreach($items as $item){
+                                            $html .= $this->getHTML($item);					
+                                        }
+                                    }
+
+                                    //print html
+                                    echo($html);
+
+                                    //close the database connection
+                                    $this->db = NULL;
+                                }
+                            }
+                            catch(PDOException $ex){
+                                print "Exception: " . $ex->getMessage();
+                            }
+
+                        }
+                    }
+
+                    /**
+                    * start
+                    */
+                    new jPListHTML();
+                ?>
             </div>
-            <div class="slider-content">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                        <h2>Find everything on eddey now</h2>
-                        <p>This is a site under constuction developed by inkers
-                            <br>This is a site under constuction developed by inkers</p>
-                        <div class="search-form wow pulse" data-wow-delay="0.8s">
-                            <div class="form-group">
-                                <div id="buttons">
-                                    <ul class="nav nav-pills">
-                                        <li class="active"><a data-toggle="pill" href="#home">COLLEGES</a></li>
-                                        <li><a data-toggle="pill" href="#menu1">COURSES</a></li>
-                                        <li><a data-toggle="pill" href="#menu2">EXAMS</a></li>
-                                        <li><a data-toggle="pill" href="#menu3">SCHOLARSHIPS</a></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content">
-                                    <div id="home" class="tab-pane fade in active">
-                                        <form action="cprofile.php" class="form-inline" method="post">
-                                            <div class="form-group">
-                                                <input name="college_name" style="text-transform: uppercase;" id="skills" class="form-control" placeholder="search colleges">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="menu1" class="tab-pane fade">
-                                        <form action="cprofile.php" class="form-inline" method="post">
-                                            <div class="form-group">
-                                                <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search Courses">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="menu2" class="tab-pane fade">
-                                        <form action="cprofile.php" class="form-inline" method="post">
-                                            <div class="form-group">
-                                                <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search Exams">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div id="menu3" class="tab-pane fade">
-                                       <form action="cprofile.php" class="form-inline" method="post">
-                                            <div class="form-group">
-                                                <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search scholarships">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- no result found -->
+            <div class="box jplist-no-results text-shadow align-center jplist-hidden">
+                <p>No results found</p>
             </div>
-        </div>
 
-        <!--Welcome area -->
-        <div class="Welcome-area" style="margin-top: 60px">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 Welcome-entry  col-sm-12">
-                        <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
-                            <div class="welcome_text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
-                                <div class="row">
-                                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                                        <!-- /.feature title -->
-                                        <h2>FIND ON EDDEY</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                            <div class="welcome_services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
-                                <div class="row">
-                                    <a href="index.html">
-                                        <div class="col-xs-6 m-padding">
-                                            <div class="welcome-estate">
-                                                <div class="welcome-icon">
-                                                    <i class="fa fa-university" style="font-size:4em;"></i>
-                                                </div>
-                                                <h3>Colleges</h3>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="index.html">
-                                        <div class="col-xs-6 m-padding">
-                                            <div class="welcome-estate">
-                                                <div class="welcome-icon">
-                                                    <i class="fa fa-book" style="font-size: 4em;"></i>
-                                                </div>
-                                                <h3>Courses</h3>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="col-xs-12 text-center">
-                                        <i class="welcome-circle"></i>
-                                    </div>
-                                    <a href="index.html">
-                                        <div class="col-xs-6 m-padding">
-                                            <div class="welcome-estate">
-                                                <div class="welcome-icon">
-                                                    <i class="fa fa-edit" style="font-size: 4em"></i>
-                                                </div>
-                                                <h3>EXAMS</h3>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="index.html">
-                                        <div class="col-xs-6 m-padding">
-                                            <div class="welcome-estate">
-                                                <div class="welcome-icon">
-                                                    <i class="fa fa-inr" style="font-size: 4em;"></i>
-                                                </div>
-                                                <h3>Scholarship </h3>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- ios button: show/hide panel -->
+            <div class="jplist-ios-button">
+                <i class="fa fa-sort"></i>
+                jPList Actions
             </div>
-        </div>
 
-        <!-- property area -->
-        <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <h2>Top Rated Colleges</h2>
-                        <p>These are the top colleges rated by our Customers</p>
-                    </div>
+            <!-- panel -->
+            <div class="jplist-panel box panel-bottom" style="margin: 0 0 20px 0">
+
+                <div
+                        class="jplist-drop-down left"
+                        data-control-type="items-per-page-drop-down"
+                        data-control-name="paging"
+                        data-control-action="paging"
+                        data-control-animate-to-top="true">
+
+                    <ul>
+                        <li><span data-number="3"> 3 per page </span></li>
+                        <li><span data-number="5"> 5 per page </span></li>
+                        <li><span data-number="10" data-default="true"> 10 per page </span></li>
+                        <li><span data-number="all"> View All </span></li>
+                    </ul>
+                </div>
+                <div
+                        class="jplist-drop-down left"
+                        data-control-type="sort-drop-down"
+                        data-control-name="sort"
+                        data-control-action="sort"
+                        data-control-animate-to-top="true">
+
+                    <ul>
+                        <li><span data-path="default">Sort by</span></li>
+                        <li><span data-path=".title" data-order="asc" data-type="text">Title A-Z</span></li>
+                        <li><span data-path=".title" data-order="desc" data-type="text">Title Z-A</span></li>
+                        <li><span data-path=".desc" data-order="asc" data-type="text">Description A-Z</span></li>
+                        <li><span data-path=".desc" data-order="desc" data-type="text">Description Z-A</span></li>
+                        <li><span data-path=".like" data-order="asc" data-type="number">Likes asc</span></li>
+                        <li><span data-path=".like" data-order="desc" data-type="number">Likes desc</span></li>
+                    </ul>
                 </div>
 
-                <div class="row">
-                    <div class="proerty-th">
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img src="assets/img/demo/property-1.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 1 </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Palakkad</span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property.html"><img src="assets/img/demo/property-2.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 2 </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Thrissur </span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-3.html"><img src="assets/img/demo/property-3.jpg"></a>
-
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 3 </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Malappuram </span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img src="assets/img/demo/property-4.jpg"></a>
-
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 4</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b>Eranamkulam</span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property.html"><img src="assets/img/demo/property-1.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 5</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Palakkad</span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property.html"><img src="assets/img/demo/property-2.jpg"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 6</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Thrissur </span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property.html"><img src="assets/img/demo/property-3.jpg"></a>
-
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property.html" >College 7</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b> Malappuram </span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-md-3 p0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img src="assets/img/demo/property-4.jpg"></a>
-
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property-1.html" >College 8</a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b>Area :</b>Eranamkulam</span>
-                                    <span class="proerty-price pull-right"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--TESTIMONIALS -->
-        <!--
-        <div class="testimonial-area recent-property" style="background-color: #FCFCFC; padding-bottom: 15px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                         /.feature title 
-                        <h2>Our Customers Said  </h2> 
-                    </div>
+                <!-- pagination results -->
+                <div
+                        class="jplist-label"
+                        data-type="{start} - {end} of {all}"
+                        data-control-type="pagination-info"
+                        data-control-name="paging"
+                        data-control-action="paging">
                 </div>
 
-                <div class="row">
-                    <div class="row testimonial">
-                        <div class="col-md-12">
-                            <div id="testimonial-slider">
-                                <div class="item">
-                                    <div class="client-text">                                
-                                        <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
-                                    </div>
-                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s"> 
-                                        <img src="assets/img/client-face1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">                                
-                                        <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="assets/img/client-face2.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">                                
-                                        <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="assets/img/client-face1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">                                
-                                        <p>Nulla quis dapibus nisl. Suspendisse llam sed arcu ultried arcu ultricies !</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="assets/img/client-face2.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
--->
-
-        <!-- Count area -->
-        <!--
-        <div class="count-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                         /.feature title 
-                        <h2>You can trust Us </h2> 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
-                        <div class="row">
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-users"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent" id="counter">0</h2>
-                                        <h5>HAPPY CUSTOMER </h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-home"></span>
-                                    </div>
-                                    <div class="chart" data-percent="12000">
-                                        <h2 class="percent" id="counter1">0</h2>
-                                        <h5>Properties in stock</h5>
-                                    </div>
-                                </div> 
-                            </div> 
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-flag"></span>
-                                    </div>
-                                    <div class="chart" data-percent="120">
-                                        <h2 class="percent" id="counter2">0</h2>
-                                        <h5>City registered </h5>
-                                    </div>
-                                </div> 
-                            </div> 
-                            <div class="col-sm-3 col-xs-6">
-                                <div class="count-item">
-                                    <div class="count-item-circle">
-                                        <span class="pe-7s-graph2"></span>
-                                    </div>
-                                    <div class="chart" data-percent="5000">
-                                        <h2 class="percent"  id="counter3">5000</h2>
-                                        <h5>DEALER BRANCHES</h5>
-                                    </div>
-                                </div> 
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
--->
-
-        <!-- boy-sale area -->
-        <!--
-        <div class="boy-sale-area">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-6 col-sm-10 col-sm-offset-1 col-md-offset-0 col-xs-12">
-                        <div class="asks-first">
-                            <div class="asks-first-circle">
-                                <span class="fa fa-search"></span>
-                            </div>
-                            <div class="asks-first-info">
-                                <h2>ARE YOU LOOKING FOR A Property?</h2>
-                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>                                        
-                            </div>
-                            <div class="asks-first-arrow">
-                                <a href="properties.html"><span class="fa fa-angle-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-sm-offset-1 col-xs-12 col-md-offset-0">
-                        <div  class="asks-first">
-                            <div class="asks-first-circle">
-                                <span class="fa fa-usd"></span>
-                            </div>
-                            <div class="asks-first-info">
-                                <h2>DO YOU WANT TO SELL A Property?</h2>
-                                <p> varius od lio eget conseq uat blandit, lorem auglue comm lodo nisl no us nibh mas lsa</p>
-                            </div>
-                            <div class="asks-first-arrow">
-                                <a href="properties.html"><span class="fa fa-angle-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <p  class="asks-call">QUESTIONS? CALL US  : <span class="strong"> + 3-123- 424-5700</span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
--->
-
-        <!-- Footer area-->
-        <div class="footer-area">
-
-            <div class=" footer">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>About us </h4>
-                                <div class="footer-title-line"></div>
-
-                                <img src="assets/img/logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i>Address Here</li>
-                                    <li><i class="pe-7s-mail strong"> </i> info@eddey.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +9746364612</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Quick links </h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-menu">
-                                    <li><a href="index.php">Home</a> </li>
-                                    <li><a href="#">Services</a> </li>
-                                    <li><a href="#">Colleges</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li><a href="faq.html">fqa</a> </li>
-                                    <li><a href="faq.html">Terms </a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Last News</h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-blog">
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="assets/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6>
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer news-letter">
-                                <h4>Stay in touch</h4>
-                                <div class="footer-title-line"></div>
-                                <p>Stay in touch with us , summit your mail for newsletters.</p>
-
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form>
-
-                                <div class="social pull-right">
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://www.facebook.com/" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://plus.google.com/" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copy text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="">
-                            <span> (C) <a href="https://www.inkers.in">Inkers</a> , All rights reserved 2017  </span>
-                        </div>
-                    </div>
+                <!-- pagination -->
+                <div
+                        class="jplist-pagination"
+                        data-control-type="pagination"
+                        data-control-name="paging"
+                        data-control-action="paging"
+                        data-control-animate-to-top="true">
                 </div>
             </div>
         </div>
 
-        <script src="assets/js/modernizr-2.6.2.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/bootstrap-select.min.js"></script>
-        <script src="assets/js/bootstrap-hover-dropdown.js"></script>
-        <script src="assets/js/easypiechart.min.js"></script>
-        <script src="assets/js/jquery.easypiechart.min.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/wow.js"></script>
-        <script src="assets/js/icheck.min.js"></script>
-        <script src="assets/js/price-range.js"></script>
-        <script src="assets/js/main.js"></script>
+        <!--<><><><><><><><><><><><><><><><><><><><><><><><><><> DEMO END <><><><><><><><><><><><><><><><><><><><><><><><><><>-->
+    </div>
+</div>
 
-    </body>
-
-    </html>
+<!-- footer -->
+<footer class="box" id="footer">
+    <div class="center">
+        <div class="box">
+            <p id="footer-content" class="align-center glow">
+                <a href="//jplist.com" title="">Copyright &copy; <script>document.write(new Date().getFullYear())</script> <b>jPList Software</b></a>
+            </p>
+        </div>
+    </div>
+</footer>
+ 
+</body>
+</html>
