@@ -33,7 +33,7 @@
 			//remove dot
 			$path = str_replace(array("."), "", $data->path);
 			$result->param = "$path";
-			$result->query = " keyword1 like ? ";
+			$result->query = " keyword2 like ? ";
 		}
 		
 		return $result;

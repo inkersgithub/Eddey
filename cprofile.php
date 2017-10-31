@@ -1,8 +1,17 @@
 <?php
 include_once 'dbconnect.php';
-$search = $_POST["college_name"]; 
-$res = mysqli_query($con,"SELECT * FROM colleges WHERE college_institution LIKE '%".$search."%'");
-$row = mysqli_fetch_array($res);
+if(isset($_GET['id'])) {
+	$search = $_GET["id"]; 
+	$res = mysqli_query($con,"SELECT * FROM colleges WHERE id='".$search."'");
+	$row = mysqli_fetch_array($res);
+    
+}else if(isset($_POST['college_name'])){
+	$search = $_POST["college_name"]; 
+	$res = mysqli_query($con,"SELECT * FROM colleges WHERE Title LIKE '%".$search."%'");
+	$row = mysqli_fetch_array($res);
+}else{
+	header("Location:index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +189,7 @@ $row = mysqli_fetch_array($res);
 
                         <div class="single-property-wrapper">
                             <div class="single-property-header">                                          
-                                <h1 class="property-title pull-left"><?php echo $row['college_institution']; ?></h1>
+                                <h1 class="property-title pull-left"><?php echo $row['Title']; ?></h1>
                                 <span class="property-price pull-right">9.1</span>
                             </div>
 
@@ -195,9 +204,9 @@ $row = mysqli_fetch_array($res);
                                 </div>
 
                                 <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                    <i class="fa fa-book" style="font-size:48px;color:#fdc601;"></i>
+                                    <i class="fa fa-wifi" style="font-size:48px;color:#fdc601;"></i>
                                     <span class="property-info-entry">
-                                        <span class="property-info-label">Library</span>
+                                        <span class="property-info-label">Wifi</span>
                                         <span class="property-info-value">Enable</span>
                                     </span>
                                 </div>
@@ -233,7 +242,7 @@ $row = mysqli_fetch_array($res);
                             <div class="section">
                                 <h4 class="s-property-title">Description</h4>
                                 <div class="s-property-content">
-                                    <p><?php echo $row['about']; ?></p>
+                                    <p><?php echo $row['description']; ?></p>
                                 </div>
                             </div>
                             <!-- End description area  -->

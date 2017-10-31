@@ -230,7 +230,7 @@ include_once 'dbconnect.php';
                     <div class="col-md-4 single-property-content ">
 								
 					<!--left side bar-->
-                    <div class="col-md-15 p0">
+                    <div class="col-md-8 p0">
                         <aside class="sidebar sidebar-property blog-asside-left">
                             
                             <div class="side-block fly-in">
@@ -271,38 +271,38 @@ include_once 'dbconnect.php';
 														<input type="radio" name="streamsearch" class="streamsearch" value="Medical+College"/>
 														MEDICAL
 													</label>
-													</div>
-
-													<div class="checkbox">
-														<label>
-															<input type="radio" name="streamsearch" class="streamsearch" value="Business+Management+College" />
-															MANAGEMENT
-														</label>
-													</div>
-													<div class="checkbox">
+														<div>
+															<div class="checkbox">
+																<label>
+																	<input type="radio" name="streamsearch" class="streamsearch" value="Business+Management+College" />
+																	MANAGEMENT
+																</label>
+															</div>
+															<div class="checkbox">
 																<label>
 																	<input type="radio" name="streamsearch" class="streamsearch"  value="Arts+and+Science+College"/>
 																	ARTS
 																</label>
-													</div>
-													<div class="checkbox">
+															</div>
+															<div class="checkbox">
 																<label>
 																	<input type="radio" name="streamsearch" class="streamsearch" value="Agriculture"/>
 																	AGRICULTURE
 																</label>
-													</div>
-													<div class="checkbox">
+															</div>
+															<div class="checkbox">
 																<label>
 																	<input type="radio" name="streamsearch" class="streamsearch" value="Nursing+or+Paramedical+College"/>
 																	NURSING
 																</label>
-													</div>
-													<div class="checkbox">
+															</div>
+															<div class="checkbox">
 																<label>
 																	<input type="radio" name="streamsearch" class="streamsearch" value="Law+College"/>
 																	LAW
 																</label>
-													</div>
+															</div>
+														</div>
 												</form>
 											</div>
 										</div>
@@ -395,10 +395,10 @@ include_once 'dbconnect.php';
 										</div>
 									</div>
 								</div>
-								<!--adds-->
+							
 								<!--<div class="panel panel-default sidebar-menu wow fadeInRight animated">
 									<div class="panel-heading">
-										<h3 class="panel-title">Ads here  </h3>
+										<h3 class="panel-title">Ads her  </h3>
 									</div>
 									<div class="panel-body recent-property-widget">
 										<img src="assets/img/ads.jpg">
@@ -407,86 +407,84 @@ include_once 'dbconnect.php';
 
                             </div>
                         </aside>
+                    </div
+					<!--left side bar-->
+					<div class="col-md-8 p0">
+						<div class="clearfix padding-top-40">
+                        <aside class="sidebar sidebar-property blog-asside-right">
+							<div class="dealer-content">
+                                <div class="inner-wrapper">
+
+                                    <div class="clear">
+                                        <div class="col-xs-3 col-sm-3 dealer-face">
+											<a href="">
+                                                    <img src="assets/img/demo/property-1.jpg" class="img-square">
+                                            </a>
+										</div>
+										<div class="col-xs-6 col-sm-8 ">
+										<h3 class="dealer-name">
+											<span>College 1</span>        
+                                        </h3>
+                                        <div class="dealer-social-media">
+                                            <a class="twitter" target="_blank" href="">
+                                            <i class="fa fa-twitter"></i>
+                                            </a>
+											<a class="facebook" target="_blank" href="">
+											<i class="fa fa-facebook"></i>
+                                             </a>
+                                                    <a class="gplus" target="_blank" href="">
+                                                        <i class="fa fa-google-plus"></i>
+                                                    </a>
+                                                    <a class="linkedin" target="_blank" href="">
+                                                        <i class="fa fa-linkedin"></i>
+                                                    </a> 
+                                                    <a class="instagram" target="_blank" href="">
+                                                        <i class="fa fa-instagram"></i>
+                                                    </a>       
+                                       </div>
+									</div>
+                                </div>
+
+                                <div class="clear">
+                                    <ul class="dealer-contacts">                                       
+										<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; <i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;<i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+
+                                    </ul>
+                                    <p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
+								</div>
+								<button class="button2" align="right" ><span>Apply</span></button>
+							</div>
+								
+					</aside
+					</div>
 						
-                    
-						<!--left side bar-->
-						<div class="col-md-8 p0">
-							<div class="clearfix padding-top-40">
-							<aside class="sidebar sidebar-property blog-asside-right">
-								<div class="dealer-content">
-										<div class="inner-wrapper">
-
-											<div class="clear">
-												<div class="col-xs-7 col-sm-3 dealer-face">
-													<a href="">
-                                                    <a><img src="assets/img/demo/property-1.jpg" class= </a>
-													</a>
-												</div>
-												<div class="col-xs-6 col-sm-8 ">
-													<h3 class="dealer-name">
-													<span>College 1</span>        
-													</h3>
-												<div class="dealer-social-media">
-													<a class="twitter" target="_blank" href="">
-													<i class="fa fa-twitter"></i>
-													</a>
-													<a class="facebook" target="_blank" href="">
-													<i class="fa fa-facebook"></i>
-													</a>
-													<a class="gplus" target="_blank" href="">
-                                                        <i class="fa fa-google-plus"></i>
-                                                    </a>
-                                                    <a class="linkedin" target="_blank" href="">
-                                                        <i class="fa fa-linkedin"></i>
-                                                    </a> 
-                                                    <a class="instagram" target="_blank" href="">
-                                                        <i class="fa fa-instagram"></i>
-                                                    </a>       
-												</div>
-											</div>
-										</div>
-
-										<div class="clear">
-											<ul class="dealer-contacts">                                       
-												<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; 
-												<li><i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;</li>
-												<li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li></li>
-											</ul>
-											<p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
-										</div>
-										<button class="button2" align="right" ><span>Apply</span></button>
-								</div>
-									
-							</aside
-						</div>
-					</div>
-					
 				</div>
-										<!--left side bar-->
-						<div class="col-md-8 p0">
-							<div class="clearfix padding-top-40">
-							<aside class="sidebar sidebar-property blog-asside-right">
-								<div class="dealer-content">
-										<div class="inner-wrapper">
 
-											<div class="clear">
-												<div class="col-xs-7 col-sm-3 dealer-face">
-													<a href="">
-                                                    <a><img src="assets/img/demo/property-2.jpg" class= </a>
-													</a>
-												</div>
-												<div class="col-xs-6 col-sm-8 ">
-													<h3 class="dealer-name">
-													<span>College 2</span>        
-													</h3>
-												<div class="dealer-social-media">
-													<a class="twitter" target="_blank" href="">
-													<i class="fa fa-twitter"></i>
-													</a>
-													<a class="facebook" target="_blank" href="">
-													<i class="fa fa-facebook"></i>
-													</a>
-													<a class="gplus" target="_blank" href="">
+					<!--left side bar-->
+					<div class="col-md-15 p0">
+						<div class="clearfix padding-top-40">
+                        <aside class="sidebar sidebar-property blog-asside-right">
+							<div class="dealer-content">
+                                <div class="inner-wrapper">
+
+                                    <div class="clear">
+                                        <div class="col-xs-3 col-sm-3 dealer-face">
+											<a href="">
+                                                    <img src="assets/img/demo/property-2.jpg" class="img-square">
+                                            </a>
+										</div>
+										<div class="col-xs-6 col-sm-8 ">
+										<h3 class="dealer-name">
+											<span>College 2</span>        
+                                        </h3>
+                                        <div class="dealer-social-media">
+                                            <a class="twitter" target="_blank" href="">
+                                            <i class="fa fa-twitter"></i>
+                                            </a>
+											<a class="facebook" target="_blank" href="">
+											<i class="fa fa-facebook"></i>
+                                             </a>
+                                                    <a class="gplus" target="_blank" href="">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                     <a class="linkedin" target="_blank" href="">
@@ -495,52 +493,51 @@ include_once 'dbconnect.php';
                                                     <a class="instagram" target="_blank" href="">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>       
-												</div>
-											</div>
-										</div>
+                                       </div>
+									</div>
+                                </div>
 
-										<div class="clear">
-											<ul class="dealer-contacts">                                       
-												<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; 
-												<li><i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;</li>
-												<li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li></li>
-											</ul>
-											<p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
-										</div>
-										<button class="button2" align="right" ><span>Apply</span></button>
+                                <div class="clear">
+                                    <ul class="dealer-contacts">      
+										<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; <i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;<i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+
+                                    </ul>
+                                    <p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
 								</div>
-									
-							</aside
-						</div>
+								<button class="button2" align="right" ><span>Apply</span></button>
+							</div>
+								
+					</aside
 					</div>
-					
+						
+				</div>
 				</div>
 				
-										<!--left side bar-->
-						<div class="col-md-8 p0">
-							<div class="clearfix padding-top-40">
-							<aside class="sidebar sidebar-property blog-asside-right">
-								<div class="dealer-content">
-										<div class="inner-wrapper">
+				<!--left side bar-->
+					<div class="col-md-15 p0">
+						<div class="clearfix padding-top-40">
+                        <aside class="sidebar sidebar-property blog-asside-right">
+							<div class="dealer-content">
+                                <div class="inner-wrapper">
 
-											<div class="clear">
-												<div class="col-xs-7 col-sm-3 dealer-face">
-													<a href="">
-                                                    <a><img src="assets/img/demo/property-3.jpg" class= </a>
-													</a>
-												</div>
-												<div class="col-xs-6 col-sm-8 ">
-													<h3 class="dealer-name">
-													<span>College 3</span>        
-													</h3>
-												<div class="dealer-social-media">
-													<a class="twitter" target="_blank" href="">
-													<i class="fa fa-twitter"></i>
-													</a>
-													<a class="facebook" target="_blank" href="">
-													<i class="fa fa-facebook"></i>
-													</a>
-													<a class="gplus" target="_blank" href="">
+                                    <div class="clear">
+                                        <div class="col-xs-3 col-sm-3 dealer-face">
+											<a href="">
+                                                    <img src="assets/img/demo/property-4.jpg" class="img-square">
+                                            </a>
+										</div>
+										<div class="col-xs-3 col-sm-8 ">
+										<h3 class="dealer-name">
+											<span>College 3</span>        
+                                        </h3>
+                                        <div class="dealer-social-media">
+                                            <a class="twitter" target="_blank" href="">
+                                            <i class="fa fa-twitter"></i>
+                                            </a>
+											<a class="facebook" target="_blank" href="">
+											<i class="fa fa-facebook"></i>
+                                             </a>
+                                                    <a class="gplus" target="_blank" href="">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                     <a class="linkedin" target="_blank" href="">
@@ -549,30 +546,31 @@ include_once 'dbconnect.php';
                                                     <a class="instagram" target="_blank" href="">
                                                         <i class="fa fa-instagram"></i>
                                                     </a>       
-												</div>
-											</div>
-										</div>
+                                       </div>
+									</div>
+                                </div>
 
-										<div class="clear">
-											<ul class="dealer-contacts">                                       
-												<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; 
-												<li><i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;</li>
-												<li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li></li>
-											</ul>
-											<p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
-										</div>
-										<button class="button2" align="right" ><span>Apply</span></button>
+                                <div class="clear">
+                                    <ul class="dealer-contacts">
+										<li><i class="pe-7s-map-marker strong"> </i> 9089 your adress here&nbsp&nbsp; <i class="pe-7s-mail strong"> </i> email@yourcompany.com&nbsp&nbsp;<i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+									</ul>
+                                    <p>Duis mollis  blandit tempus porttitor curabiturDuis mollis  blandit tempus porttitor curabitur , est non</p>
 								</div>
-									
-							</aside
-						</div>
+								<button class="button2" align="right" ><span>Apply</span></button>
+							</div>
+								
+					</aside
 					</div>
-					
+						
 				</div>
+				</div>
+				
+				
+				
+                </div>
 			</div>
+        </div>
 		</div>
-	</div>
-					
 		
 		<br><br>
 

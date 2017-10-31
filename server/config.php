@@ -1,11 +1,11 @@
 <?php
 
-/** 
-* MySQL settings 
+/**
+* MySQL settings
 */
 
 //The name of the database
-define('DB_NAME', 'jplist');
+define('DB_NAME', 'eddey_db');
 
 //MySQL database username
 define('DB_USER', 'user_anoop');
@@ -17,6 +17,6 @@ define('DB_PASSWORD', 'admin');
 define('DB_HOST', '127.0.0.1');
 
 //MySQL hostname
-define('DB_TABLE', 'Item');
+//define('DB_TABLE', 'Item');
 
 ?>

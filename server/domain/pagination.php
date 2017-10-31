@@ -63,7 +63,7 @@
 		public function getNumberOfPages(){
 			
 			$count = 0;		
-			$query = "SELECT count(ID) FROM " . DB_TABLE . " ";
+			$query = "SELECT count(ID) FROM colleges";
 						
 			if(count($this->filter->preparedParams) > 0){
                 

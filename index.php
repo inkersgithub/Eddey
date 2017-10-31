@@ -84,6 +84,9 @@ include_once 'dbconnect.php';
             <div id="status">&nbsp;</div>
         </div>
         <!-- Body content -->
+
+        <!--End top header -->
+
         <nav class="navbar navbar-default" id="header-wrap">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -167,6 +170,7 @@ include_once 'dbconnect.php';
                                 </li>
                             </ul>
                         </li>
+
                         <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -206,7 +210,7 @@ include_once 'dbconnect.php';
                                         <form action="cprofile.php" class="form-inline" method="post">
                                             <div class="form-group">
                                                 <input name="college_name" style="text-transform: uppercase;" id="skills" class="form-control" placeholder="search colleges">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-arrow-right"></i></button>
+                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -214,7 +218,7 @@ include_once 'dbconnect.php';
                                         <form action="cprofile.php" class="form-inline" method="post">
                                             <div class="form-group">
                                                 <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search Courses">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-arrow-right"></i></button>
+                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -222,7 +226,7 @@ include_once 'dbconnect.php';
                                         <form action="cprofile.php" class="form-inline" method="post">
                                             <div class="form-group">
                                                 <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search Exams">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-arrow-right"></i></button>
+                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -230,7 +234,7 @@ include_once 'dbconnect.php';
                                         <form action="cprofile.php" class="form-inline" method="post">
                                             <div class="form-group">
                                                 <input style="text-transform: uppercase;" id="skills" class="form-control" placeholder="Search scholarships">
-                                                <button class="btn search-btn" type="submit"><i class="fa fa-arrow-right"></i></button>
+                                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>

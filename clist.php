@@ -240,9 +240,9 @@ include_once 'dbconnect.php';
 		
 		<div class="container">
 			<div class="row">
-				 <div class="col-sm-3">
+				 <div class="col-sm-1">
     </div>
-				<div class="col-sm-9">
+				<div class="col-sm-10">
     <div id="products" class="row list-group" style="margin-top:25px;">
         <div class="item list-group-item  col-xs-4 col-lg-4">
             <div class="thumbnail">
@@ -372,7 +372,8 @@ include_once 'dbconnect.php';
         </div>
     </div>
 </div>
-				
+				<div class="col-sm-1">
+    </div>
 		</div>
 </div>	
         <!--college list end-->

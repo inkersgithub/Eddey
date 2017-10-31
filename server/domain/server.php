@@ -35,7 +35,7 @@
 			$items = null;
 			
 			//init qury
-			$query = "SELECT title, description, image, likes, viewsnumber, keyword1, keyword2 FROM " . DB_TABLE . " ";
+			$query = "SELECT id, title, description, keyword1, keyword2 FROM colleges";
 
 			if($this->filter->filterQuery){				
 				$query .= " " . $this->filter->filterQuery . " ";

@@ -1,21 +1,21 @@
 <?php
 	//added standard php/mysql config file with host, user and password info
 	require "server/config.php";
-	
+
 	//models and collections
 	require "server/domain/models/filter-result-model.php";
 	require "server/domain/collection/filter-result-collection.php";
-	
+
 	//domain
 	require "server/domain/action.php";
 	require "server/domain/filtering.php";
-	
+
 	//controls
-	require "server/controls/textbox.php";	
+	require "server/controls/textbox.php";
 	require "server/controls/checkboxgroupfilter.php";
 	require "server/controls/filterdropdown.php";
 	require "server/controls/filterselect.php";
-    require "server/controls/range-slider.php";	
+    require "server/controls/range-slider.php";
     require "server/controls/range-filter.php";
 ?>
 
@@ -112,41 +112,19 @@
             <ul id="black-top-bar-left-menu" class="hmenu left iphone-hidden">
                 <li class="glow">
                     <a title="" href="//github.com/no81no/jplist/issues?state=open">
-                        <i class="fa fa-asterisk"></i> Request a feature / <i class="fa fa-bug"></i> Report a bug
+                       
                     </a>
                 </li>
             </ul>
 
             <!-- social menu -->
-            <ul id="social-menu" class="hmenu right">
-                <li class="glow"><a title="" href="//www.facebook.com/jplist"><i class="fa fa-facebook"></i>&nbsp;</a></li>
-                <li class="glow"><a rel="publisher" title="" href="//plus.google.com/+Jplistjs"><i class="fa fa-google-plus"></i></a></li>
-                <li class="glow"><a title="" href="//twitter.com/jquery_jplist"><i class="fa fa-twitter"></i></a></li>
-                <li class="glow"><a title="" href="//github.com/no81no/jplist"><i class="fa fa-github"></i></a></li>
-            </ul>
+            
         </div>
     </div>
 </div>
 
 <!-- header -->
-<header id="header" class="box">
-    <div id="header-box" class="box">
-        <div class="center">
-            <div class="box">
 
-                <!-- logo -->
-                <div class="align-center text-shadow" id="logo">
-                    <p>
-                        <img title="jPList - jQuery Data Grid Controls" alt="jPList - jQuery Data Grid Controls" src="//jplist.com/content/img/common/rocket.png" />
-                        <a title="" href="//jplist.com">jPList - jQuery Data Grid Controls</a>
-                    </p>
-                    <h1 class="h1-30-normal">Fallback for search engines demo</h1>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</header>
 
 <!-- main content -->
 <div class="box">
@@ -264,10 +242,10 @@
 
                     <ul>
                         <li><span data-path="default">Filter by category</span></li>
-                        <li><span data-path=".architecture">Architecture</span></li>
-                        <li><span data-path=".christmas">Christmas</span></li>
-                        <li><span data-path=".lifestyle">LifeStyle</span></li>
-                        <li><span data-path=".nature">Nature</span></li>
+                        <li><span data-path=".Private Un-Aided">Private Un-Aided</span></li>
+                        <li><span data-path=".Private Aided">Private Aided</span></li>
+                        <li><span data-path=".State Government">State Government</span></li>
+                       
                     </ul>
                 </div>
 
@@ -279,76 +257,30 @@
                         data-control-name="themes">
 
                     <input
-                            data-path=".architecture"
-                            id="architecture"
+                            data-path=".Palakkad"
+                            id="Palakkad"
                             type="checkbox"
                     />
 
-                    <label for="architecture">Architecture</label>
+                    <label for="architecture">Palakkad</label>
 
                     <input
-                            data-path=".christmas"
-                            id="christmas"
+                            data-path=".Thrissur"
+                            id="Thrissur"
                             type="checkbox"
                     />
 
-                    <label for="christmas">Christmas</label>
-
-                    <input
-                            data-path=".nature"
-                            id="nature"
+                    <label for="christmas">Thrissur</label>
+					
+					<input
+                            data-path=".Kollam"
+                            id="Kollam"
                             type="checkbox"
                     />
 
-                    <label for="nature">Nature</label>
+                    <label for="christmas">Kollam</label>
 
-                    <input
-                            data-path=".lifestyle"
-                            id="lifestyle"
-                            type="checkbox"
-                    />
-
-                    <label for="lifestyle">Lifestyle</label>
-                </div>
-
-                <div
-                        class="jplist-group"
-                        data-control-type="checkbox-group-filter"
-                        data-control-action="filter"
-                        data-control-name="colors">
-
-                    <input
-                            data-path=".red"
-                            id="red-color"
-                            type="checkbox"
-                    />
-
-                    <label for="red-color">Red</label>
-
-                    <input
-                            data-path=".green"
-                            id="green-color"
-                            type="checkbox"
-                    />
-
-                    <label for="green-color">Green</label>
-
-                    <input
-                            data-path=".blue"
-                            id="blue-color"
-                            type="checkbox"
-                    />
-
-                    <label for="blue-color">Blue</label>
-
-                    <input
-                            data-path=".brown"
-                            id="brown-color"
-                            type="checkbox"
-                    />
-
-                    <label for="brown-color">Brown</label>
-
+                    
                 </div>
 
                 <!-- views -->
@@ -393,7 +325,7 @@
 
             <!-- ajax content here -->
             <div class="list box text-shadow">
-                   
+
                 <?php
 
                     class jPListHTML{
@@ -422,13 +354,13 @@
                             $items = null;
 
                             //init qury
-                            $query = "SELECT title, description, image, likes, viewsnumber, keyword1, keyword2 FROM " . DB_TABLE . " ";
+                            $query = "SELECT id, title, description, keyword1, keyword2 FROM colleges";
 
-                            if($this->filter->filterQuery){				
+                            if($this->filter->filterQuery){
                                 $query .= " " . $this->filter->filterQuery . " ";
                             }
 
-                            if(count($this->filter->preparedParams) > 0){	
+                            if(count($this->filter->preparedParams) > 0){
 
                                 $stmt = $this->db->prepare($query);
                                 $stmt->execute($this->filter->preparedParams);
@@ -436,7 +368,7 @@
                             }
                             else{
                                 $items = $this->db->query($query);
-                            }	
+                            }
 
                             return $items;
                         }
@@ -449,20 +381,23 @@
                         private function getHTML($item){
 
                             $html = "";
-
-                            $html .= "<div class='list-item box'>";	
+                            $html .= "<div class='list-item box'>";
+							$html .= "<a href='cprofile.php?id=" . $item['id'] . "'>";
                             $html .= "	<div class='img left'>";
-                            $html .= "		<img src='" . $item['image'] . "' alt='' title=''/>";
+//                            $html .= "		<img src='" . $item['image'] . "' alt='' title=''/>";
+                            $html .= "		<img src='assets/img/demo/property-4.jpg' alt='' style='width: 100%; max-width:100%; margin-top:5px;' title=''/>";
                             $html .= "	</div>";
 
                             $html .= "	<div class='block right'>";
-                            $html .= "		<p class='title'>" . $item['title'] . "</p>";
-                            $html .= "		<p class='desc'>" . $item['description'] . "</p>";
-                            $html .= "		<p class='like'>" . $item['likes'] . " Likes</p>";
-                            $html .= "		<p class='views'>" . $item['viewsnumber'] . " Views</p>";
+                            $html .= "		<p class='title' style='text-transform: uppercase;'>" . $item['title'] . "</p>";
+                            $html .= "		<p class='desc' style='overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 18px; max-height: 110px; -webkit-line-clamp: 5; -webkit-box-orient: vertical;'>" . $item['description'] . "</p>";
+//                            $html .= "		<p class='like'>" . $item['likes'] . " Likes</p>";
+//                            $html .= "		<p class='views'>" . $item['viewsnumber'] . " Views</p>";
                             $html .= "		<p class='theme'>" . $item['keyword1'] . ", " . $item['keyword2'] . "</p>";
                             $html .= "	</div>";
-                            $html .= "</div>";
+                            $html .= "</a>";
+							$html .= "</div>";
+                            
 
                             return $html;
                         }
@@ -497,21 +432,21 @@
                                         "inDeepLinking": true
                                     }]';
 
-                                    //connect to database 
-                                    $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);	
+                                    //connect to database
+                                    $this->db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
 
                                     //decode statuses
                                     $this->statuses = json_decode($statuses);
 
                                     //start filter
-                                    $this->filter = new Filter($this->statuses);	
+                                    $this->filter = new Filter($this->statuses);
 
                                     //get html data
                                     $items = $this->getData();
 
                                     if($items){
                                         foreach($items as $item){
-                                            $html .= $this->getHTML($item);					
+                                            $html .= $this->getHTML($item);
                                         }
                                     }
 
@@ -616,6 +551,6 @@
         </div>
     </div>
 </footer>
- 
+
 </body>
 </html>
